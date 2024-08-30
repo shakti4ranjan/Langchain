@@ -1,8 +1,10 @@
 import streamlit as st  # Import Streamlit for creating the web app
 import pandas as pd  # Import pandas for data handling
-from langchain_openai import ChatOpenAI  # Import the ChatOpenAI class for chat-based models
+from langchain.chat_models import ChatOpenAI  # Correct import for ChatOpenAI from LangChain
 from langchain.prompts import ChatPromptTemplate  # Import ChatPromptTemplate for formatting chat prompts
 from langchain.chains import LLMChain  # Import LLMChain to create a chain for processing input
+from gtts import gTTS  # Import gTTS for text-to-speech
+import os  # Import os for file handling
 
 # Set up the title and description for the Streamlit app
 st.title("LangChain Chatbot & Data Analyzer")
@@ -14,7 +16,7 @@ api_key = st.text_input("Enter your OpenAI API key:", type="password")
 # Only create an instance of ChatOpenAI if an API key is provided
 if api_key:
     # Create an instance of ChatOpenAI LLM with the provided API key and model name
-    llm = ChatOpenAI(api_key=api_key, model="gpt-4")
+    llm = ChatOpenAI(openai_api_key=api_key, model="gpt-4")
 
     # Define a dynamic chat prompt template with a placeholder for user queries
     prompt_template = ChatPromptTemplate.from_messages([("user", "{user_query}")])
@@ -36,6 +38,11 @@ if api_key:
         with st.spinner("Generating response..."):
             response = get_response_from_query(user_query)
             st.write("Response:", response)
+
+            # Text-to-speech conversion using gTTS
+            tts = gTTS(text=response, lang='en')
+            tts.save("response.mp3")  # Save the generated audio to a file
+            st.audio("response.mp3")  # Play the audio file in Streamlit
 
 else:
     st.warning("Please enter your OpenAI API key to use the chatbot.")
