@@ -1,5 +1,5 @@
 streamlit
 pandas
-langchain_openai==0.0.5
+langchain_openai==0.4.6
 langchain==0.2
 openai
