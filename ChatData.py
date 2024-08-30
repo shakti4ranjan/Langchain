@@ -13,7 +13,7 @@ st.write("Ask any question and get a response from the GPT-4 model. You can also
 # Streamlit input field for API key
 api_key = st.text_input("Enter your OpenAI API key:", type="password")
 
-# Only create an instance of ChatOpenAI if an API key is provided
+#Only create an instance of ChatOpenAI if an API key is provided
 if api_key:
     # Create an instance of ChatOpenAI LLM with the provided API key and model name
     llm = ChatOpenAI(openai_api_key=api_key, model="gpt-4")
