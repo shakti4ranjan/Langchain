@@ -1,4 +1,4 @@
-streamlit==1.38.0
+streamlit
 pandas
-langchain_openai==0.4.6
-langchain==0.2
+langchain_openai
+langchain
