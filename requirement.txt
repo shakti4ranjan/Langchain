@@ -1,6 +1,4 @@
 streamlit
 pandas
-langchain_openai
-langchain.prompts 
-langchain.chains
+langchain_openai 0.0.30
 langchain
